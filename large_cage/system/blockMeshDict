@@ -1,0 +1,99 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1906                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+scale   1;
+
+vertices
+(
+    ( -18.0     -36.01   -29.9 )    // vertex number 0
+    (  60.1     -36.01   -29.9 )    // vertex number 1
+    (  60.1      48.01   -29.9 )    // vertex number 2
+    ( -18.0      48.01   -29.9 )    // vertex number 3
+    ( -18.0     -36.01    0.00 )    // vertex number 4
+    (  60.1     -36.01    0.00 )    // vertex number 5
+    (  60.1      48.01    0.00 )    // vertex number 6
+    ( -18.0      48.01    0.00 )    // vertex number 7
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (78 84 30) simpleGrading (1 1 1)
+ 			//			   x   y  z
+            //dx=1 m
+);
+
+boundary
+(
+    left  // inlet
+    {
+        type patch;
+        faces
+        (
+            (0 4 7 3)
+        );
+    }
+
+    right  //outlet
+    {
+        type patch;
+        faces
+        (
+            (2 6 5 1)
+        );
+    }
+
+    top
+    {
+        type wall;
+        faces
+        (
+            (4 5 6 7)
+        );
+    }
+
+    bottom
+    {
+        type wall;
+        faces
+        (
+
+            (0 3 2 1)
+        );
+    }
+
+    front
+    {
+        type wall;
+        faces
+        (
+            //(3 7 6 2)
+            (1 5 4 0)
+        );
+    }
+    back
+    {
+        type wall;
+        faces
+        (
+            (3 7 6 2)
+            //(1 5 4 0)
+        );
+    }
+
+
+);
+
+// ************************************************************************* //

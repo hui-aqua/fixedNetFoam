@@ -1,0 +1,37 @@
+#!/bin/sh
+# Source tutorial run functions
+python3 constant/circularCage.py
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+runApplication blockMesh
+##################### lavel1
+# cp system/topoSetDict.refineLevel1 system/topoSetDict
+# runApplication topoSet
+# mv log.topoSet log.topoSetLevel1
+
+# runApplication refineMesh -dict system/refineMeshDict.level1 -overwrite
+# mv log.refineMesh log.refineMeshLevel1
+
+# #################### lavel2
+# cp system/topoSetDict.refineLevel2 system/topoSetDict
+# runApplication topoSet
+# mv log.topoSet log.topoSetLevel2
+
+# runApplication refineMesh -dict system/refineMeshDict.level2 -overwrite
+# mv log.refineMesh log.refineMeshLevel2
+##################### lavel3
+# cp system/topoSetDict.refineLevel3 system/topoSetDict
+# runApplication topoSet
+# mv log.topoSet log.topoSetLevel3
+
+# runApplication refineMesh -dict refineMeshDict.level3 -overwrite
+# mv log.refineMesh log.refineMeshLevel3
+
+
+runApplication checkMesh
+# runApplication fixedNetFoam
+
+
+runApplication decomposePar
+runApplication mpirun -np 8 fixedNetFoam -parallel
+# runApplication reconstructPar
