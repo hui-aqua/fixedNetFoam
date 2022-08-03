@@ -1,3 +1,0 @@
-netPanel.C
-
-LIB = $(FOAM_USER_LIBBIN)/libnetPanel2
